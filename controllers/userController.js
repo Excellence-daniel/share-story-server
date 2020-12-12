@@ -19,7 +19,7 @@ module.exports = {
       });
       req.body.password = hashedPassword;
       user = await userModel(req.body).save();
-      return res.status(200).json({ message: "created user", user });
+      return res.status(200).json({ message: "Created a new user", user });
     } catch (error) {
       return res.status(500).send(error);
     }
