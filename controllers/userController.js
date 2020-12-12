@@ -1,5 +1,6 @@
 const userModel = require("../models/userModel");
 const bcrypt = require("bcrypt-nodejs");
+const mail = require("../utils/mail");
 
 module.exports = {
   register: async function (req, res) {
@@ -19,6 +20,7 @@ module.exports = {
       });
       req.body.password = hashedPassword;
       user = await userModel(req.body).save();
+      await mail.sendVerificationMail(email, user.firstname);
       return res.status(200).json({ message: "Created a new user", user });
     } catch (error) {
       return res.status(500).send({ message: error });
