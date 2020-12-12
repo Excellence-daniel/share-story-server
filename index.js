@@ -28,7 +28,6 @@ app.use(express.json());
 app.use(cors());
 
 app.listen(process.env.PORT || port, () => {
-  console.log({ config });
   console.log("Server started work on " + port);
 });
 

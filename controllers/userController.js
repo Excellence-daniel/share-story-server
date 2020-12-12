@@ -7,7 +7,7 @@ module.exports = {
       const { email } = req.body;
       let user = await userModel.findOne({ email });
       if (user) {
-        res.send(400).json({
+        return res.status(400).json({
           message: "User already exists. Please signup with a new email",
         });
       }
@@ -21,7 +21,7 @@ module.exports = {
       user = await userModel(req.body).save();
       return res.status(200).json({ message: "Created a new user", user });
     } catch (error) {
-      return res.status(500).send(error);
+      return res.status(500).send({ message: error });
     }
   },
 };
